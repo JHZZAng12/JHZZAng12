@@ -27,6 +27,7 @@ Spring Boot와 FastAPI로 백엔드를 개발했습니다. 서비스 로그를 �
 | **웹서비스 장애 관제** | API별 요청 수와 오류율, 사용자 제보를 한 화면에서 확인할 수 있습니다. | [시연 영상](https://youtu.be/CIOXdKjb7LM) |
 | **SelDi** | 제품 사진과 증상을 입력하면 AI가 단서를 찾고, 진단 규칙에 따라 고장 원인 후보와 조치 방법을 안내합니다. | [서비스 보기](https://seldi-fresh-frontend.vercel.app/) |
 | **계약안심** | 계약서 PDF에서 주의할 조항을 찾아 원문을 인용해 보여줍니다. | [서비스 보기](https://youth-housing-risk-ai-frontend.vercel.app/) |
+| **Arduino 거리 기반 모터 제어** | PIR 센서가 움직임을 감지하면 초음파로 거리를 재고, 거리 구간에 따라 모터 PWM과 경고 LED를 제어하는 시제품입니다. | [시연 영상](https://youtu.be/Ds1BTGLDAUU) |
 
 ## Developer Tools
 
