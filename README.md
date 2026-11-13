@@ -2,29 +2,29 @@
 
 **Backend & Systems Automation**
 
-요청 로그로 서비스 장애를 분석하고, 반복되는 개발 작업을 자동화합니다. AI 검토에서 발견한 문제는 재현하고, 수정 결과를 테스트로 확인합니다.
+서비스 장애를 살펴볼 수 있는 관제 시스템과 반복되는 Git 작업을 줄이는 도구를 만들었습니다. AI가 짚은 문제는 먼저 재현해 보고, 수정한 뒤 같은 조건에서 다시 확인합니다.
 
 ## Featured Projects
 
-| 프로젝트 | 구현 | 링크 |
+| 프로젝트 | 주요 기능 | 링크 |
 | --- | --- | --- |
-| **웹서비스 장애 관제** | API 요청 로그와 사용자 제보를 모아 장애 상태를 판단하고, Hadoop 집계 결과를 Oracle에 저장합니다. `Spring Boot` · `Hadoop` · `Oracle` | [시연 영상](https://youtu.be/CIOXdKjb7LM) |
-| **SelDi** | AI가 사진과 증상에서 단서를 찾고, 규칙 엔진이 고장 원인 후보를 좁힙니다. `Next.js` · `FastAPI` · `PostgreSQL` | [시연](https://seldi-fresh-frontend.vercel.app/) |
-| **계약안심** | PDF에서 위험 조항 후보를 찾고, AI가 제시한 근거를 계약서 원문과 대조합니다. `Next.js` · `TypeScript` · `Supabase` | [시연](https://youth-housing-risk-ai-frontend.vercel.app/) |
-| **Git Auto Backup** | Python 파일의 변경을 감지해 커밋하고, 푸시에 실패하면 재시도합니다. `Python` · `Git` | [코드](https://github.com/JHZZAng12/git-auto-backup) |
+| **웹서비스 장애 관제** | API 요청 로그와 사용자 제보를 바탕으로 장애 여부를 판단합니다. Hadoop으로 로그를 집계해 Oracle에 저장합니다. `Spring Boot` · `Hadoop` · `Oracle` | [시연 영상](https://youtu.be/CIOXdKjb7LM) |
+| **SelDi** | 제품 사진과 증상을 입력하면 AI가 단서를 찾고, 규칙 엔진이 가능한 고장 원인을 좁혀 줍니다. `Next.js` · `FastAPI` · `PostgreSQL` | [서비스 보기](https://seldi-fresh-frontend.vercel.app/) |
+| **계약안심** | 계약서 PDF에서 주의할 조항을 찾고, AI가 인용한 문구가 원문에 있는지 확인합니다. `Next.js` · `TypeScript` · `Supabase` | [서비스 보기](https://youth-housing-risk-ai-frontend.vercel.app/) |
+| **Git Auto Backup** | Python 파일이 바뀌면 자동으로 커밋하고, 푸시가 실패하면 다시 시도합니다. `Python` · `Git` | [코드 보기](https://github.com/JHZZAng12/git-auto-backup) |
 
-![웹서비스 장애 관제 대시보드의 로그 분석 결과와 API별 오류율](assets/monitoring-dashboard.png)
+![웹서비스 장애 관제 대시보드에 표시된 API별 오류율](assets/monitoring-dashboard.png)
 
 ## Automation
 
-- **웹서비스 장애 관제** — 대시보드에서 분석 버튼을 누르면 로그 전송, HDFS 업로드, MapReduce 집계, Oracle 저장, 화면 갱신이 차례로 실행됩니다.
-- **Git Auto Backup** — 2초마다 Python 파일의 변경을 확인합니다. 마지막 변경 후 30초 동안 추가 변경이 없으면 자동으로 커밋하고, 푸시가 실패하면 30초 간격으로 재시도합니다.
-- **계약안심** — main 브랜치에 변경을 올리거나 main을 대상으로 PR을 열면 GitHub Actions가 Vitest, 빌드, 타입 검사, Playwright를 실행하도록 설정했습니다.
+- **웹서비스 장애 관제** — 분석 버튼을 한 번 누르면 로그를 HDFS로 보내고, MapReduce로 집계한 결과를 Oracle에 저장한 뒤 대시보드를 갱신합니다.
+- **Git Auto Backup** — 2초마다 파일 변경을 확인합니다. 마지막 변경으로부터 30초가 지나면 커밋하고, 푸시에 실패하면 30초마다 다시 시도합니다.
+- **계약안심** — `main`에 코드를 올리거나 병합을 요청하면 GitHub Actions에서 Vitest 테스트, 빌드, 타입 검사, Playwright 브라우저 테스트가 차례로 실행되도록 설정했습니다.
 
 ## AI-Assisted Development
 
-- **SelDi** — Codex에 진단 이력 저장 과정을 점검하도록 요청했습니다. 결과 화면에서 증상 텍스트가 빠져 API가 422를 반환하는 조건을 재현했습니다. 증상 텍스트를 요청에 유지하도록 보완한 뒤, 같은 조건에서 진단과 이력 저장이 성공하는지 다시 확인했습니다.
-- **계약안심** — AI 코드 리뷰 후 시연용 PDF로 다시 확인하는 과정에서, PDF 헤더가 첫 조항에 붙어 같은 조항이 중복 집계되는 문제를 찾았습니다. 조항 번호를 기준으로 본문을 나누고, 번호 표기가 달라도 본문이 같으면 같은 근거로 처리하도록 수정했습니다. 두 경우를 회귀 테스트로 남겼고, 로컬에서 관련 테스트 2개가 통과했습니다.
+- **SelDi** — Codex와 진단 이력이 저장되지 않는 경우를 살펴봤습니다. 결과 화면에서 증상이 빠진 채 요청을 보내면 API가 422 오류를 반환했습니다. 요청에 증상이 빠지지 않도록 고친 뒤, 같은 조건에서 진단 결과가 나오고 이력도 저장되는지 확인했습니다.
+- **계약안심** — AI 코드 리뷰를 마친 뒤 예제 PDF로 다시 점검하다가, 제목과 첫 조항이 붙어 추출되면서 같은 조항이 두 번 집계되는 문제를 발견했습니다. 조항 번호를 기준으로 본문을 나누고, 번호가 있든 없든 본문이 같으면 한 번만 집계하도록 고쳤습니다. 관련 회귀 테스트 2개를 로컬에서 실행해 통과를 확인했습니다.
 
 ## Education & Certifications
 
