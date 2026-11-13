@@ -2,34 +2,37 @@
 
 **Backend & Systems Automation**
 
+Spring Boot와 FastAPI로 백엔드를 개발했습니다. 서비스 로그를 모아 장애를 분석하는 시스템과 Python 파일을 GitHub에 자동으로 백업하는 도구를 만들었습니다.
+
+[개인 홈페이지](https://jhzzang12.github.io/)
+
 ## Tech Stack
 
 - **백엔드** · Java, Spring Boot, Python, FastAPI
-- **웹·데이터베이스** · TypeScript, Next.js, PostgreSQL, Oracle, Supabase
-- **로그 분석·개발 자동화** · Hadoop, Git, GitHub Actions, Vitest, Playwright
+- **웹** · TypeScript, Next.js
+- **데이터베이스·배포** · Oracle, PostgreSQL, Supabase, Vercel
+- **로그 분석·테스트** · Hadoop, GitHub Actions, Vitest, Playwright
 
 ## Core Skills
 
-- **로그 분석 자동화** — 웹서비스 장애 관제에서 분석 버튼을 누르면 로그를 HDFS에 올리고, MapReduce로 집계해 Oracle에 저장합니다. 저장이 끝나면 대시보드에 새 결과가 표시됩니다.
-- **테스트 자동화** — 계약안심에서 `main`에 코드를 올리거나 `main`으로 PR을 보내면 GitHub Actions에서 단위 테스트, 빌드, 타입 검사, 브라우저 테스트가 차례로 실행됩니다.
-- **AI 검토와 오류 재현** — SelDi에서 증상이 빠진 요청을 보내면 이력이 저장되지 않는 문제를 Codex와 재현했습니다. 요청에 증상을 포함하도록 고친 뒤 같은 조건에서 저장을 확인했습니다.
-- **회귀 테스트** — 계약안심의 AI 코드 리뷰 이후 예제 PDF를 다시 분석해 조항이 두 번 집계되는 문제를 찾았습니다. PDF 제목을 첫 조항과 분리하고, 조항 번호를 빼면 같은 인용은 한 번만 집계하도록 고쳤습니다. 관련 회귀 테스트 2개를 로컬에서 통과했습니다.
+- **API 개발과 데이터 저장** — SelDi에서 사진과 증상을 받아 추가 질문과 진단 결과를 돌려주는 API를 만들었습니다. 완료된 진단은 PostgreSQL에 저장해 다시 조회할 수 있습니다.
+- **로그 분석 자동화** — 장애 관제 화면에서 분석 버튼을 누르면 로그를 HDFS로 전송하고, MapReduce로 집계한 결과를 Oracle에 저장합니다. 저장이 끝나면 대시보드가 갱신됩니다.
+- **테스트 자동화** — 계약안심에서 `main`에 코드가 올라오거나 PR이 열리면 GitHub Actions가 단위 테스트, 빌드, 타입 검사, 브라우저 테스트를 실행하도록 구성했습니다.
+- **AI 검토와 재검증** — SelDi에서 증상 내용이 빠지면 진단 이력이 저장되지 않는 문제를 Codex와 재현하고, 수정 후 같은 요청 흐름에서 저장을 확인했습니다. 계약안심에서는 AI 코드 리뷰 뒤 예제 PDF를 다시 분석해 조항이 중복 집계되는 문제를 찾았습니다. 조항을 나누는 방식과 중복 판정 기준을 고친 뒤 회귀 테스트 2개가 통과했습니다.
 
 ## Featured Projects
 
 | 프로젝트 | 주요 기능 | 링크 |
 | --- | --- | --- |
-| **웹서비스 장애 관제** | API별 요청 수와 오류율을 대시보드에 표시하고, 사용자 제보를 함께 보여줍니다. | [시연 영상](https://youtu.be/CIOXdKjb7LM) |
-| **SelDi** | 제품 사진과 증상에서 AI가 단서를 찾고, 진단 규칙에 따라 고장 원인 후보와 조치 방법을 안내합니다. | [서비스 보기](https://seldi-fresh-frontend.vercel.app/) |
-| **계약안심** | 계약서 PDF에서 주의할 조항을 찾아 원문 인용과 함께 보여줍니다. | [서비스 보기](https://youth-housing-risk-ai-frontend.vercel.app/) |
-
-![웹서비스 장애 관제 대시보드에 표시된 API별 오류율](assets/monitoring-dashboard.png)
+| **웹서비스 장애 관제** | API별 요청 수와 오류율, 사용자 제보를 한 화면에서 확인할 수 있습니다. | [시연 영상](https://youtu.be/CIOXdKjb7LM) |
+| **SelDi** | 제품 사진과 증상을 입력하면 AI가 단서를 찾고, 진단 규칙에 따라 고장 원인 후보와 조치 방법을 안내합니다. | [서비스 보기](https://seldi-fresh-frontend.vercel.app/) |
+| **계약안심** | 계약서 PDF에서 주의할 조항을 찾아 원문을 인용해 보여줍니다. | [서비스 보기](https://youth-housing-risk-ai-frontend.vercel.app/) |
 
 ## Developer Tools
 
-**Git Auto Backup** · Python, Git
-
-Python 파일을 2초마다 확인합니다. 30초 동안 추가 변경이 없으면 자동으로 커밋하고 GitHub에 올립니다. 푸시에 실패하면 30초 뒤 다시 시도합니다. [공개 코드](https://github.com/JHZZAng12/git-auto-backup)
+| 도구 | 주요 기능 | 링크 |
+| --- | --- | --- |
+| **Git Auto Backup** | Python 파일이 바뀐 뒤 30초 동안 추가 변경이 없으면 커밋하고 GitHub에 올립니다. 푸시에 실패하면 30초 간격으로 다시 시도합니다. | [GitHub](https://github.com/JHZZAng12/git-auto-backup) |
 
 ## Education & Certifications
 
